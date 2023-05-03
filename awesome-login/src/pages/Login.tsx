@@ -5,6 +5,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { FA_IR } from '../language/fa_IR'
 import { Button, TextInput } from '../components/core'
+//@ts-ignore
+import AuthLogin from '../assets/undraw_account_re_o7id-blue.svg'
 
 const defaultValues = { email: '', password: '' }
 const LoginFormValidation = yup.object({
@@ -18,7 +20,7 @@ const LoginFormValidation = yup.object({
 const Login = () => {
   const {
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors},
     control,
     resetField,
     register,
@@ -29,15 +31,15 @@ const Login = () => {
   const onSubmit = (data) => console.log(data)
 
   return (
-    <section className="w-full h-screen flex items-center justify-center lg:justify-between gap-5">
+    <section className="w-full h-screen flex items-center justify-center px-10">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="p-5 w-4/5 sm:w-3/5 lg:w-1/3"
+        className="p-5 w-4/5"
       >
-        <div className="card w-full lg:w-96 bg-red-300 shadow-xl">
+        <div className="card w-full lg:w-4/5 bg-indigo-200 shadow-xl p-3 rounded-lg">
           <div className="card-body">
-            <h2 className="card-title mx-auto">{FA_IR.Welcome}</h2>
-            <div className="mt-10">
+            <h5 className="card-title mx-auto text-center">{FA_IR.Welcome}</h5>
+            <div className="mt-5">
               <Controller
                 control={control}
                 name="email"
@@ -49,14 +51,14 @@ const Login = () => {
                     onBlur={onBlur}
                     onChange={onChange}
                     value={value}
-                    className="my-3 outline outline-purple-400 focus:outline-purple-300"
+                    
                     placeholder={FA_IR.Email}
                     ref={ref}
                   />
                 )}
               />
               {errors.email && (
-                <p className="text-red-600">{errors.email.message}</p>
+                <p className="text-red-600 font-bold my-1">{errors.email.message}</p>
               )}
 
               <Controller
@@ -70,7 +72,7 @@ const Login = () => {
                     onBlur={onBlur}
                     onChange={onChange}
                     value={value}
-                    className="my-3 outline outline-purple-400 focus:outline-purple-300"
+                    className="mt-5"
                     placeholder={FA_IR.Password}
                     type="password"
                     ref={ref}
@@ -78,13 +80,14 @@ const Login = () => {
                 )}
               />
               {errors.password && (
-                <p className="text-red-600">{errors.password.message}</p>
+                <p className="text-red-600 font-bold my-1">{errors.password.message}</p>
               )}
             </div>
+          <Button className="btn-secondary w-full mt-5" type="submit">{ FA_IR.Login}</Button>
           </div>
         </div>
-        <input type="submit" />
       </form>
+      <img src={AuthLogin} alt="AuthLogin" className='hidden lg:block w-1/2' />
     </section>
   )
 }

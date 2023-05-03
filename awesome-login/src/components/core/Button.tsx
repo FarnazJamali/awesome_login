@@ -4,12 +4,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   full?: boolean
 }
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button = ({
   full,
   children,
   className,
   ...props
-}) => (
+}: ButtonProps) => (
   <button
     className={
       'btn' + (full ? ' btn-block' : '') + (className ? ' ' + className : '')
